@@ -1,0 +1,48 @@
+.edit-employee-container {
+    padding: 20px;
+  }
+  
+  .edit-employee-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .edit-employee-form {
+    border: 2px solid #3182ce;
+    border-radius: 8px;
+    width: 600px;
+    padding: 20px;
+    margin: 0 auto;
+  }
+  
+  .edit-employee-field {
+    margin-bottom: 16px;
+  }
+  
+  .edit-employee-label {
+    font-size: 1.2rem;
+    margin-right: 10px;
+    color: #4a5568;
+  }
+  
+  .edit-employee-input {
+    border: 1px solid #cbd5e0;
+    border-radius: 4px;
+    padding: 8px;
+    width: calc(100% - 24px);
+  }
+  
+  .edit-employee-button {
+    padding: 10px;
+    background-color: #63b3ed;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 16px;
+  }
+  
+  .edit-employee-button:hover {
+    background-color: #3182ce;
+  }
+  

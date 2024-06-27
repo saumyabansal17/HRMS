@@ -1,0 +1,50 @@
+.employee-container {
+    padding: 16px;
+  }
+  
+  .title {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .table-container {
+    overflow-x: auto;
+  }
+  
+  .custom-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .custom-th,
+  .custom-td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .custom-th {
+    background-color: #f4f4f4;
+  }
+  
+  .custom-tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .flex {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .icon {
+    font-size: 24px;
+  }
+  
+  .edit-icon {
+    color: #ffc107;
+  }
+  
+  .delete-icon {
+    color: #dc3545;
+  }
+  

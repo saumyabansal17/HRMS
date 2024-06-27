@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext,useState } from 'react';
+import { UserContext } from '../UserContext';
 import './Login.css';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const { setUser } = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -11,17 +13,28 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3001/login', { username, password })
+    setError('');
+    axios.post('http://localhost:3001/login', { username, password }, { withCredentials: true })
       .then(res => {
-        if (res.data.Status === "Success") {
-          if (res.data.role === "admin") {
+        const userData = res.data;
+        console.log(userData);
+        if (userData.Status === "Success") {
+          setUser(userData);
+          if (userData.role === "admin") {
+            // console.log("status success");
+           
             navigate('/adash');
           } else {
+            // console.log("hlo here");
             navigate('/udash');
           }
+        }else{
+          console.log("login failed");
         }
+        
       })
       .catch(err => {
+        console.log("Admin error")
         setError(err.response.data.error);
       });
   };
@@ -31,6 +44,7 @@ const Login = () => {
       <h2>Login</h2>
       {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSubmit}>
+        <div className='form'>
         <div className="form-group">
           <label htmlFor="username">Username:</label>
           <input
@@ -51,7 +65,7 @@ const Login = () => {
             required
           />
         </div>
-        
+        </div>
         <button type="submit">Login</button>
       </form>
       <div className="register-link">
