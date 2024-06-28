@@ -13,8 +13,10 @@ import EditEmp from './pages/EditEmployee';
 import UpdateEmp from './pages/UpdateEmployee';
 import UpdateDetails from './pages/UpdateDetails';
 import DeleteEmp from './pages/DeleteEmployee';
-import Feature3 from './pages/Feature3';
-import Feature4 from './pages/Feature4';
+import LeaveStatus from './pages/LeaveStatus';
+import ReviewLeave from './pages/ReviewLeave';
+import LeaveRequest from './pages/LeaveRequest';
+
 
 function App() {
   return (
@@ -30,10 +32,11 @@ function App() {
           <Route path="/editemp" element={<Dashboard role="admin"><EditEmp /></Dashboard>} />
           <Route path="/employee/update/:id" element={<Dashboard role="admin"><UpdateEmp /></Dashboard>} />
           <Route path="/employee/delete/:id" element={<Dashboard role="admin"><DeleteEmp/></Dashboard>} />
+          <Route path="/api/leave/manage/:id" element={<Dashboard role="admin"><ReviewLeave/></Dashboard>} />
           <Route path="/udash/employee/:id" element={<Dashboard role="visitor"><EmpDetails/></Dashboard>} />
           <Route path="/udash/update/:id" element={<Dashboard role="visitor"><UpdateDetails/></Dashboard>} />
-          <Route path="/page2/feature3" element={<Dashboard><Feature3 /></Dashboard>} />
-          <Route path="/page2/feature4" element={<Dashboard><Feature4 /></Dashboard>} />
+          <Route path="/api/leave/request" element={<Dashboard role="visitor"><LeaveRequest/></Dashboard>} />
+          <Route path="/api/leave/requests" element={<Dashboard role="visitor"><LeaveStatus/></Dashboard>} />
         </Routes>
        </UserProvider> 
     </BrowserRouter>

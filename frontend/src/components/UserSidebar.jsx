@@ -31,14 +31,14 @@ const UserSidebar = () => {
           )}
         </li>
         <li>
-          <div className="dropdown-heading" onClick={() => setPage2Open(!page2Open)}>Page2</div>
+          <div className="dropdown-heading" onClick={() => setPage2Open(!page2Open)}>Leave Request</div>
           {page2Open && (
             <ul className="dropdown-list">
               <li>
-                <Link to="/page2/feature3">Feature 3</Link>
+                <Link to="/api/leave/request">New Request</Link>
               </li>
               <li>
-                <Link to="/page2/feature4">Feature 4</Link>
+                <Link to="/api/leave/requests">View Status</Link>
               </li>
             </ul>
           )}

@@ -6,6 +6,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
 import { UserModel } from './models/User.js';
+import {LeaveRequestModel} from './models/LeaveRequest.js'
 
 const app = express();
 dotenv.config();
@@ -156,7 +157,7 @@ app.post('/login', async (req, res) => {
     bcrypt.compare(password, user.password, (err, response) => {
       if (response) {
         // Passwords match, generate token    
-      const token = jwt.sign({ username: user.username, role: user.role }, "jwt-secret-key", { expiresIn: '1d' });
+      const token = jwt.sign({ username: user.username,name:user.name, role: user.role }, "jwt-secret-key", { expiresIn: '1d' });
       console.log("backend Token : ",token);
       res.cookie('token', token, { httpOnly: true }); // Secure flag should be set in production
         return res.json({ Status: "Success", role: user.role, id: user._id });
@@ -341,6 +342,85 @@ app.put('/employee/update/:id', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+// Endpoint to submit a leave request
+app.post('/api/leave/request', verifyUser, async (req, res) => {
+  const { username,name } = req.user;
+  const { startDate, endDate, reason } = req.body;
+
+  try {
+    const newLeaveRequest = await LeaveRequestModel.create({
+      username,
+      name,
+      startDate,
+      endDate,
+      reason,
+    });
+
+    res.status(201).json({ status: 'Success', leaveRequest: newLeaveRequest });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Endpoint to fetch all leave requests for a user
+app.get('/api/leave/requests', verifyUser, async (req, res) => {
+  const { username } = req.user;
+
+  try {
+    const userLeaveRequests = await LeaveRequestModel.find({ username });
+    res.status(200).json(userLeaveRequests);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/api/leave/requests/pending', verifyUser, async (req, res) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    const pendingRequests = await LeaveRequestModel.find({ status: 'Pending' });
+    res.status(200).json(pendingRequests);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Endpoint to fetch all leave requests (admin view)
+app.get('/api/leave/requests/all', verifyUser, async (req, res) => {
+  try {
+    const allLeaveRequests = await LeaveRequestModel.find();
+    res.status(200).json(allLeaveRequests);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Endpoint to update the status of a leave request by admin
+app.put('/api/leave/manage/:id', verifyUser, async (req, res) => {
+  const { id } = req.params;
+  const { status } = req.body;
+
+  try {
+    const updatedLeaveRequest = await LeaveRequestModel.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+
+    if (!updatedLeaveRequest) {
+      return res.status(404).json({ error: 'Leave request not found' });
+    }
+
+    res.status(200).json({ status: 'Success', leaveRequest: updatedLeaveRequest });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 
 // Check authentication endpoint
 app.get('/api/check-auth', (req, res) => {
