@@ -7,6 +7,7 @@ import './Sidebar.css';
 const UserSidebar = () => {
   const [page1Open, setPage1Open] = useState(false);
   const [page2Open, setPage2Open] = useState(false);
+  const [page3Open, setPage3Open] = useState(false);
   const { user } = useContext(UserContext);
 
   if (!user) {
@@ -31,14 +32,24 @@ const UserSidebar = () => {
           )}
         </li>
         <li>
-          <div className="dropdown-heading" onClick={() => setPage2Open(!page2Open)}>Leave Request</div>
+          <div className="dropdown-heading" onClick={() => setPage2Open(!page2Open)}>Leave</div>
           {page2Open && (
             <ul className="dropdown-list">
               <li>
-                <Link to="/api/leave/request">New Request</Link>
+                <Link to={"/api/leave/request"}>Leave Request</Link>
               </li>
               <li>
-                <Link to="/api/leave/requests">View Status</Link>
+                <Link to={"/api/leave/requests"}>Request Status</Link>
+              </li>
+            </ul>
+          )}
+        </li>
+        <li>
+          <div className="dropdown-heading" onClick={() => setPage3Open(!page3Open)}>Attendance</div>
+          {page3Open && (
+            <ul className="dropdown-list">
+              <li>
+                <Link to={`/api/attendance/view`}>View Attendance</Link>
               </li>
             </ul>
           )}

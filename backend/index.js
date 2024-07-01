@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
 import { UserModel } from './models/User.js';
 import {LeaveRequestModel} from './models/LeaveRequest.js'
+import {AttendanceModel} from './models/Attendance.js'
 
 const app = express();
 dotenv.config();
@@ -157,7 +158,7 @@ app.post('/login', async (req, res) => {
     bcrypt.compare(password, user.password, (err, response) => {
       if (response) {
         // Passwords match, generate token    
-      const token = jwt.sign({ username: user.username,name:user.name, role: user.role }, "jwt-secret-key", { expiresIn: '1d' });
+      const token = jwt.sign({ username: user.username,name:user.name, role: user.role,id: user._id }, "jwt-secret-key", { expiresIn: '1d' });
       console.log("backend Token : ",token);
       res.cookie('token', token, { httpOnly: true }); // Secure flag should be set in production
         return res.json({ Status: "Success", role: user.role, id: user._id });
@@ -178,10 +179,10 @@ const verifyUser = (req, res, next) => {
   const token = req.cookies.token;
   console.log("Admin Token : ",token)
   if (!token) {
-    // console.log("Token is missing");
+    console.log("Token is missing");
     return res.status(401).json({ error: 'Token is missing' });
   } else {
-    // console.log("Token is not missing");
+    console.log("Token is not missing");
     jwt.verify(token, "jwt-secret-key", (err, decoded) => {
       if (err) {
         // console.log("Error with token");
@@ -202,6 +203,31 @@ const verifyUser = (req, res, next) => {
     });
   }
 };
+
+const verifyUsers = async (req, res, next) => {
+  const token = req.cookies.token;
+  console.log("Admin Token : ",token)
+  if (!token) {
+    console.log("Token is missing");
+      return res.status(401).json({ error: 'No token provided' });
+  }
+
+  try {
+      const decoded = jwt.verify(token, 'jwt-secret-key');
+      console.log("Decoded token:", decoded);
+      console.log("Decoded id:", decoded.id); // Use your actual secret key
+      const user = await UserModel.findById(decoded.id);
+      if (!user) {
+        console.log("Token invalid inside");
+          return res.status(401).json({ error: 'Invalid token' });
+      }
+      req.user = user; // Attach user information to req.user
+      next();
+  } catch (error) {
+      return res.status(401).json({ error: 'Invalid token' });
+  }
+};
+
 
 app.get('/adash',verifyUser,(req,res)=>{
   if (req.user.role !== 'admin') {
@@ -418,6 +444,76 @@ app.put('/api/leave/manage/:id', verifyUser, async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+});
+
+
+// Mark attendance for all users
+app.post('/api/attendance/mark', verifyUser, async (req, res) => {
+    if (req.user.role !== 'admin') {
+        return res.status(403).json({ error: 'Unauthorized' });
+    }
+    const { date, attendances } = req.body; // { date: '2023-06-30', attendances: [{ userId: '123', status: 'Present', leaveType: 'None' }, ...] }
+
+    try {
+        const attendancePromises = attendances.map(att => 
+            AttendanceModel.findOneAndUpdate(
+                { userId: att.userId, date },
+                { ...att, date },
+                { upsert: true, new: true }
+            )
+        );
+        const results = await Promise.all(attendancePromises);
+        res.status(200).json({ status: 'Success', results });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Update attendance for a user
+app.put('/api/attendance/update/:id', verifyUser, async (req, res) => {
+    if (req.user.role !== 'admin') {
+        return res.status(403).json({ error: 'Unauthorized' });
+    }
+    const { id } = req.params;
+    const { date, status, leaveType } = req.body;
+
+    try {
+        const updatedAttendance = await AttendanceModel.findOneAndUpdate(
+            { userId: id, date },
+            { status, leaveType },
+            { new: true }
+        );
+        res.status(200).json({ status: 'Success', updatedAttendance });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+app.get('/api/users', async (req, res) => {
+  try {
+    const employees = await UserModel.find({ role: { $ne: 'admin' } });
+    res.status(200).json({ data: employees });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Get attendance for a user
+app.get('/api/attendance/user/:id', verifyUsers, async (req, res) => {
+  console.log("user: ",req.user._id);
+  console.log("params: ",req.params.id);
+    if (req.user.role !== 'admin' && req.user.id !== req.params.id) {
+        return res.status(403).json({ error: 'Unauthorized' });
+    }
+    const { id } = req.params;
+
+    try {
+        const attendance = await AttendanceModel.find({ userId: id });
+        console.log(attendance);
+        res.status(200).json(attendance);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
 
