@@ -19,6 +19,8 @@ import LeaveRequest from './pages/LeaveRequest';
 import ViewAttendance from './pages/ViewAttendance';
 import UpdateAttendance from './pages/UpdateAttendance';
 import MarkAttendance from './pages/MarkAttendance';
+import SetSalary from './pages/SetSalary';
+import ViewSalary from './pages/ViewSalary';
 
 function App() {
   return (
@@ -37,11 +39,13 @@ function App() {
           <Route path="/api/leave/manage/:id" element={<Dashboard role="admin"><ReviewLeave/></Dashboard>} />
           <Route path="/api/attendance/mark" element={<Dashboard role="admin"><MarkAttendance/></Dashboard>} />
           <Route path="/api/attendance/update" element={<Dashboard role="admin"><UpdateAttendance/></Dashboard>} />
+          <Route path="/api/salary/set" element={<Dashboard role="admin"><SetSalary/></Dashboard>} />
           <Route path="/udash/employee/:id" element={<Dashboard role="visitor"><EmpDetails/></Dashboard>} />
           <Route path="/udash/update/:id" element={<Dashboard role="visitor"><UpdateDetails/></Dashboard>} />
           <Route path="/api/leave/request" element={<Dashboard role="visitor"><LeaveRequest/></Dashboard>} />
           <Route path="/api/leave/requests" element={<Dashboard role="visitor"><LeaveStatus/></Dashboard>} />
           <Route path="/api/attendance/view" element={<Dashboard role="visitor"><ViewAttendance/></Dashboard>} />
+          <Route path="/api/salary/view" element={<Dashboard role="visitor"><ViewSalary/></Dashboard>} />
         </Routes>
        </UserProvider> 
     </BrowserRouter>

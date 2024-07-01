@@ -1,0 +1,50 @@
+/* src/components/LeaveRequest.css */
+.leave-request-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .leave-request-form div {
+    margin-bottom: 15px;
+  }
+  
+  .leave-request-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .leave-request-form input[type="date"],
+  .leave-request-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .leave-request-form textarea {
+    height: 100px;
+    resize: vertical;
+  }
+  
+  .leave-request-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .leave-request-form button:hover {
+    background-color: #45a049;
+  }
+  

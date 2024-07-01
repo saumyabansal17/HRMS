@@ -1,0 +1,68 @@
+/* src/components/AddEmployee.css */
+.addemp-container {
+    max-width: 800px;
+    margin: 0 auto;
+    height:100vh;
+    padding: 20px;
+    background-color: #f9f9f9;
+    /* border-radius: 8px; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .addemp-header {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .addemp-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .form-group {
+    flex: 1 1 45%; /* This allows items to be side by side if space allows */
+    min-width: 250px;
+  }
+  
+  .form-group.full-width {
+    flex: 1 1 100%;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .addemp-input {
+    width: auto;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .addemp-button {
+    width: auto;
+    padding: 10px;
+    margin-left: 83%;
+    /* background-color: #4CAF50; */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .addemp-button:hover {
+    background-color: #45a049;
+  }
+  

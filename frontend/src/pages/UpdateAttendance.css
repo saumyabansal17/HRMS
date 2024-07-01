@@ -1,0 +1,47 @@
+/* src/components/AdminUpdateAttendance.css */
+.update-attendance-container {
+    /* max-width: 600px; */
+    margin: 0 auto;
+    padding: 20px;
+    height:100vh;
+    background-color: #f9f9f9;
+    /* border-radius: 8px; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.update-attendance-header {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.update-attendance-select,
+.update-attendance-date,
+.update-attendance-status,
+.update-attendance-leave {
+    display: block;
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.update-attendance-button {
+    /* background-color: #4CAF50; */
+    display: block;
+    width: auto;
+    margin-left: 92%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.update-attendance-button:hover {
+    background-color: #45a049;
+}

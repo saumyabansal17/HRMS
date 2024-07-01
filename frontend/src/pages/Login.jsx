@@ -1,4 +1,4 @@
-import React, { useContext,useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { UserContext } from '../UserContext';
 import './Login.css';
 import axios from 'axios';
@@ -21,17 +21,13 @@ const Login = () => {
         if (userData.Status === "Success") {
           setUser(userData);
           if (userData.role === "admin") {
-            // console.log("status success");
-           
             navigate('/adash');
           } else {
-            // console.log("hlo here");
             navigate('/udash');
           }
-        }else{
+        } else {
           console.log("login failed");
         }
-        
       })
       .catch(err => {
         console.log("Admin error")
@@ -40,36 +36,38 @@ const Login = () => {
   };
 
   return (
-    <div className="form-container">
-      <h2>Login</h2>
-      {error && <div className="error-message">{error}</div>}
-      <form onSubmit={handleSubmit}>
-        <div className='form'>
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        </div>
-        <button type="submit">Login</button>
-      </form>
-      <div className="register-link">
-        <p>Don't have an account? <Link to="/register">Register here</Link></p>
+    <div className="background-container">
+      <div className="login-container">
+        <h2>Login</h2>
+        {error && <div className="error-message">{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <div className='form'>
+            <div className="form-group">
+              <label htmlFor="username">Username:</label>
+              <input
+                type="text"
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+          </div>
+          <button type="submit">Login</button>
+        </form>
+        {/* <div className="register-link">
+          <p>Don't have an account? <Link to="/register">Register here</Link></p>
+        </div> */}
       </div>
     </div>
   );

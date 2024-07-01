@@ -1,9 +1,11 @@
-import React, { useState,useContext } from 'react';
+// src/components/LeaveRequest.js
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../UserContext';
+import './LeaveRequest.css';
 
 const LeaveRequest = () => {
-    const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [reason, setReason] = useState('');
@@ -13,7 +15,7 @@ const LeaveRequest = () => {
     try {
       await axios.post('http://localhost:3001/api/leave/request', {
         username: user.username,
-        name:user.name,
+        name: user.name,
         startDate,
         endDate,
         reason,
@@ -30,7 +32,7 @@ const LeaveRequest = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="leave-request-form" onSubmit={handleSubmit}>
       <div>
         <label>Start Date:</label>
         <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} required />

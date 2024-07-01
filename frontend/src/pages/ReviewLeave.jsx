@@ -1,5 +1,7 @@
+// src/components/ReviewLeave.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './ReviewLeave.css';
 
 const ReviewLeave = () => {
   const [leaveRequests, setLeaveRequests] = useState([]);
@@ -21,6 +23,7 @@ const ReviewLeave = () => {
   const handleReject = (requestId) => {
     updateLeaveRequestStatus(requestId, 'Rejected');
   };
+
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const year = date.getFullYear();
@@ -50,18 +53,20 @@ const ReviewLeave = () => {
   };
 
   return (
-    <div>
-      <h2>Leave Requests to Approve/Reject</h2>
-      <ul>
+    <div className="review-leave-container">
+      <h2 className="review-leave-header">Leave Requests to Approve/Reject</h2>
+      <ul className="review-leave-list">
         {leaveRequests.map(request => (
-          <li key={request._id}>
-            <p>Username: {request.username}</p>
+          <li key={request._id} className="review-leave-item">
+            <p className="username">Username: {request.username}</p>
             <p>Start Date: {formatDate(request.startDate)}</p>
             <p>End Date: {formatDate(request.endDate)}</p>
             <p>Reason: {request.reason}</p>
-            <p>Status: {request.status}</p>
-            <button onClick={() => handleApprove(request._id)}>Approve</button>
-            <button onClick={() => handleReject(request._id)}>Reject</button>
+            <p className="status">Status: {request.status}</p>
+            <div className="review-leave-buttons">
+              <button className="review-leave-button approve" onClick={() => handleApprove(request._id)}>Approve</button>
+              <button className="review-leave-button reject" onClick={() => handleReject(request._id)}>Reject</button>
+            </div>
           </li>
         ))}
       </ul>

@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../UserContext';
+import './MarkAttendance.css';
 
 const MarkAttendance = () => {
     const { user } = useContext(UserContext);
@@ -33,10 +34,15 @@ const MarkAttendance = () => {
     };
 
     return (
-        <div>
-            <h2>Mark Attendance</h2>
-            <input type="date" value={date} onChange={e => setDate(e.target.value)} />
-            <table>
+        <div className="att-container">
+            <h2 className="att-header">Mark Attendance</h2>
+            <input 
+                type="date" 
+                className="att-date-input" 
+                value={date} 
+                onChange={e => setDate(e.target.value)} 
+            />
+            <table className="att-table">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -50,6 +56,7 @@ const MarkAttendance = () => {
                             <td>{user.name}</td>
                             <td>
                                 <select
+                                    className="att-select"
                                     value={attendances.find(att => att.userId === user._id).status}
                                     onChange={e => handleAttendanceChange(user._id, 'status', e.target.value)}
                                 >
@@ -60,6 +67,7 @@ const MarkAttendance = () => {
                             </td>
                             <td>
                                 <select
+                                    className="att-select"
                                     value={attendances.find(att => att.userId === user._id).leaveType}
                                     onChange={e => handleAttendanceChange(user._id, 'leaveType', e.target.value)}
                                     disabled={attendances.find(att => att.userId === user._id).status !== 'Leave'}
@@ -74,7 +82,7 @@ const MarkAttendance = () => {
                     ))}
                 </tbody>
             </table>
-            <button onClick={handleSubmit}>Submit</button>
+            <button className="att-button" onClick={handleSubmit}>Submit</button>
         </div>
     );
 };

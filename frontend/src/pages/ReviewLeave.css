@@ -1,0 +1,78 @@
+/* src/components/ReviewLeave.css */
+.review-leave-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    height:100vh;
+    background-color: #f9f9f9;
+    /* border-radius: 8px; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.review-leave-header {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.review-leave-list {
+    list-style-type: none;
+    width: 25rem;;
+    padding: 0;
+}
+
+.review-leave-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    padding: 15px;
+}
+
+.review-leave-item p {
+    margin: 5px 0;
+}
+
+.review-leave-item .username {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.review-leave-item .status {
+    color: #f44336;
+}
+
+.review-leave-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.review-leave-button {
+    padding: 10px 15px;
+    border: none;
+    width:auto;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin:20px;
+}
+
+.review-leave-button.approve {
+    background-color: #4CAF50;
+    color: white;
+    
+}
+
+.review-leave-button.approve:hover {
+    background-color: #45a049;
+}
+
+.review-leave-button.reject {
+    background-color: #f44336;
+    color: white;
+}
+
+.review-leave-button.reject:hover {
+    background-color: #d32f2f;
+}

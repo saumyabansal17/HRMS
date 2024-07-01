@@ -48,6 +48,16 @@ const AdminSidebar = () => {
             </ul>
           )}
         </li>
+        <li>
+          <div className="dropdown-heading" onClick={() => setPage4Open(!page4Open)}>Salary</div>
+          {page4Open && (
+            <ul className="dropdown-list">
+              <li>
+                <Link to="/api/salary/set">Set Salary</Link>
+              </li>
+            </ul>
+          )}
+        </li>
       </ul>
     </div>
   );

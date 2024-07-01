@@ -1,0 +1,64 @@
+/* src/components/AdminMarkAttendance.css */
+.att-container {
+    /* max-width: 800px; */
+    margin: 0 auto;
+    padding: 20px;
+    height:100vh;
+    background-color: #f9f9f9;
+    /* border-radius: 8px; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.att-header {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.att-date-input {
+    display: block;
+    margin: 0 auto 20px auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.att-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.att-table th,
+.att-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.att-table th {
+    background-color: #f2f2f2;
+}
+
+.att-select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.att-button {
+    display: block;
+    margin-left: 92%;
+    width: auto;
+    padding: 10px;
+    /* background-color: #4CAF50; */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.att-button:hover {
+    background-color: #45a049;
+}

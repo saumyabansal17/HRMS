@@ -1,9 +1,10 @@
+// src/components/AddEmployee.js
 import React, { useState } from 'react';
-import './Signup.css';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import './AddEmployee.css';
 
-const Feature1 = () => {
+const AddEmployee = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -34,7 +35,8 @@ const Feature1 = () => {
 
     axios.post('http://localhost:3001/addemp', userData)
       .then(res => {
-        navigate('/');
+        alert("Addded new employee successfully")
+        navigate('/adash');
       })
       .catch(err => {
         setError(err.response.data.error);
@@ -42,13 +44,13 @@ const Feature1 = () => {
   };
 
   return (
-    <div className="form-containers">
-      <h2>Add Employee</h2>
+    <div className="addemp-container">
+      <h2 className="addemp-header">Add Employee</h2>
       {error && <p className="error">{error}</p>}
-      <form onSubmit={handleSubmit}>
+      <form className="addemp-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Name:</label>
-          <input
+          <input className='.addemp-input'
             type="text"
             id="name"
             value={name}
@@ -58,7 +60,7 @@ const Feature1 = () => {
         </div>
         <div className="form-group">
           <label htmlFor="email">Email:</label>
-          <input
+          <input className='.addemp-input'
             type="email"
             id="email"
             value={email}
@@ -68,7 +70,7 @@ const Feature1 = () => {
         </div>
         <div className="form-group">
           <label htmlFor="password">Password:</label>
-          <input
+          <input className='.addemp-input'
             type="password"
             id="password"
             value={password}
@@ -78,7 +80,7 @@ const Feature1 = () => {
         </div>
         <div className="form-group">
           <label htmlFor="designation">Designation:</label>
-          <input
+          <input className='.addemp-input'
             type="text"
             id="designation"
             value={designation}
@@ -87,7 +89,7 @@ const Feature1 = () => {
         </div>
         <div className="form-group">
           <label htmlFor="contactNo">Contact No:</label>
-          <input
+          <input className='.addemp-input'
             type="text"
             id="contactNo"
             value={contactNo}
@@ -96,7 +98,7 @@ const Feature1 = () => {
         </div>
         <div className="form-group full-width">
           <label htmlFor="address">Address:</label>
-          <input
+          <input className='.addemp-input'
             type="text"
             id="address"
             value={address}
@@ -105,7 +107,7 @@ const Feature1 = () => {
         </div>
         <div className="form-group">
           <label htmlFor="dob">Date of Birth:</label>
-          <input
+          <input className='.addemp-input'
             type="date"
             id="dob"
             value={dob}
@@ -114,7 +116,7 @@ const Feature1 = () => {
         </div>
         <div className="form-group">
           <label htmlFor="department">Department:</label>
-          <input
+          <input className='.addemp-input'
             type="text"
             id="department"
             value={department}
@@ -123,17 +125,17 @@ const Feature1 = () => {
         </div>
         <div className="form-group">
           <label htmlFor="bloodGroup">Blood Group:</label>
-          <input
+          <input className='.addemp-input'
             type="text"
             id="bloodGroup"
             value={bloodGroup}
             onChange={(e) => setBloodGroup(e.target.value)}
           />
         </div>
-        <button type="submit">Add Employee</button>
+        <button className="addemp-button" type="submit">Add Employee</button>
       </form>
     </div>
   );
 };
 
-export default Feature1;
+export default AddEmployee;

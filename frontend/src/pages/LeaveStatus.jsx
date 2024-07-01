@@ -1,6 +1,8 @@
-import React, { useState, useEffect,useContext } from 'react';
+// src/components/LeaveStatus.js
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../UserContext';
+import './LeaveStatus.css';
 
 const LeaveStatus = () => {
   const { user } = useContext(UserContext);
@@ -27,11 +29,11 @@ const LeaveStatus = () => {
   };
 
   return (
-    <div>
-      <h2>Your Leave Requests</h2>
-      <ul>
+    <div className="leave-status-container">
+      <h2 className="leave-status-header">Your Leave Requests</h2>
+      <ul className="leave-status-list">
         {leaveRequests.map(request => (
-          <li key={request._id}>
+          <li key={request._id} className="leave-status-item">
             <p>Start Date: {formatDate(request.startDate)}</p>
             <p>End Date: {formatDate(request.endDate)}</p>
             <p>Reason: {request.reason}</p>

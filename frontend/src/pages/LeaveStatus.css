@@ -1,0 +1,42 @@
+/* src/components/LeaveStatus.css */
+.leave-status-container {
+    max-width: 600px;
+    height:100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.leave-status-header {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.leave-status-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.leave-status-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    padding: 15px;
+}
+
+.leave-status-item p {
+    margin: 5px 0;
+}
+
+.leave-status-item p:first-child {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.leave-status-item p:last-child {
+    color: #f44336;
+}

@@ -1,12 +1,14 @@
-// 
-
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../UserContext';
+import './AdminDashboard.css'; // Adjust the import path as necessary
 
 const AdminDashboard = () => {
   const [suc, setSuc] = useState();
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
+
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
@@ -22,8 +24,11 @@ const AdminDashboard = () => {
 
   return (
     <>
-      <div>AdminDashboard</div>
-      <h2>{suc}</h2>
+      {user && (
+        <div className="welcome-box">
+          <h2>Welcome, {user.name}</h2>
+        </div>
+      )}
     </>
   );
 };

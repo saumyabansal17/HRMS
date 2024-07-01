@@ -66,7 +66,7 @@ const UpdateEmployee = () => {
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Employee edited successfully', { variant: 'success' });
-        navigate('/');
+        navigate('/editemp');
       })
       .catch((error) => {
         setLoading(false);

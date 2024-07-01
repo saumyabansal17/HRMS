@@ -54,7 +54,7 @@ const UpdateDetails = () => {
 
   return (
     <div className='update-details-container'>
-      <h2 className='update-details-title'>Edit Employee</h2>
+      <h2 className='update-details-title'>Edit Details</h2>
       <form onSubmit={handleSubmit} className='update-details-form'>
         <div className='update-details-field'>
           <label className='update-details-label'>Blood Group:</label>

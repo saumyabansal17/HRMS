@@ -8,6 +8,7 @@ const UserSidebar = () => {
   const [page1Open, setPage1Open] = useState(false);
   const [page2Open, setPage2Open] = useState(false);
   const [page3Open, setPage3Open] = useState(false);
+  const [page4Open, setPage4Open] = useState(false);
   const { user } = useContext(UserContext);
 
   if (!user) {
@@ -50,6 +51,16 @@ const UserSidebar = () => {
             <ul className="dropdown-list">
               <li>
                 <Link to={`/api/attendance/view`}>View Attendance</Link>
+              </li>
+            </ul>
+          )}
+        </li>
+        <li>
+          <div className="dropdown-heading" onClick={() => setPage4Open(!page4Open)}>Salary</div>
+          {page4Open && (
+            <ul className="dropdown-list">
+              <li>
+                <Link to="/api/salary/view">View Salary</Link>
               </li>
             </ul>
           )}

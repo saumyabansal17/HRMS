@@ -8,6 +8,7 @@ import cookieParser from 'cookie-parser';
 import { UserModel } from './models/User.js';
 import {LeaveRequestModel} from './models/LeaveRequest.js'
 import {AttendanceModel} from './models/Attendance.js'
+import { SalaryModel } from './models/Salary.js';
 
 const app = express();
 dotenv.config();
@@ -516,7 +517,42 @@ app.get('/api/attendance/user/:id', verifyUsers, async (req, res) => {
     }
 });
 
+app.post('/api/salary/set', verifyUser, async (req, res) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ error: 'Unauthorized' });
+  }
 
+  const { userId, baseSalary, bonus, deductions } = req.body;
+
+  try {
+    const netSalary = baseSalary + bonus - deductions;
+    const salary = await SalaryModel.findOneAndUpdate(
+      { userId },
+      { baseSalary, bonus, deductions, netSalary },
+      { new: true, upsert: true }
+    );
+    res.status(200).json(salary);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Route for users to view their salary
+app.get('/api/salary/user/:id', verifyUsers, async (req, res) => {
+  const { id } = req.params;
+
+  // Allow access if the request is made by the admin or the user themself
+  if (req.user.role !== 'admin' && req.user._id.toString() !== id) {
+    return res.status(403).json({ error: 'Unauthorized' });
+  }
+
+  try {
+    const salary = await SalaryModel.findOne({ userId: id });
+    res.status(200).json(salary);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 // Check authentication endpoint
 app.get('/api/check-auth', (req, res) => {

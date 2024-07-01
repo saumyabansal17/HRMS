@@ -1,8 +1,10 @@
+// src/components/ViewAttendance.js
 import React, { useEffect, useContext, useState } from 'react';
 import { Chart, ArcElement, Tooltip, Legend, Title } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 import axios from 'axios';
 import { UserContext } from '../UserContext';
+import './ViewAttendance.css';
 
 // Register Chart.js components
 Chart.register(ArcElement, Tooltip, Legend, Title);
@@ -97,17 +99,21 @@ const ViewAttendance = () => {
     }, [user]);
 
     return (
-        <div>
-            <h2>Attendance Overview</h2>
-            <div>
+        <div className="attendance-container">
+            <h2 className="attendance-header">Attendance Overview</h2>
+            <div className="chart-container">
                 <h3>Remaining Leaves</h3>
-                <Pie data={remainingLeavesData} />
+                <div className="chart">
+                    <Pie data={remainingLeavesData} />
+                </div>
             </div>
-            <div>
+            <div className="chart-container">
                 <h3>Attendance Status Distribution</h3>
-                <Pie data={attendanceStatusData} />
+                <div className="chart">
+                    <Pie data={attendanceStatusData} />
+                </div>
             </div>
-            <div>
+            <div className="present-percentage">
                 <h3>Present Percentage</h3>
                 <p>{presentPercentage.toFixed(2)}%</p>
             </div>
